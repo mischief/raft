@@ -1,0 +1,29 @@
+</$objtype/mkfile
+
+LIB=libraft.$O.a
+OFILES=\
+	consensus.$O \
+	election.$O \
+	log.$O \
+	nettcp.$O \
+	pub.$O \
+	serialize.$O \
+	storage.$O
+
+HFILES=\
+	consensus.h \
+	impl.h
+
+</sys/src/cmd/mklib
+
+$O.test: test.$O $LIB
+	$LD -o $target $prereq
+
+$O.nettest: nettest.$O $LIB
+	$LD -o $target $prereq
+
+test:V: $O.test
+	$O.test
+
+clean:V:
+	rm -f *.[$OS] [$OS].* raftlog.*
